@@ -1,19 +1,34 @@
 // Меняем цвет фона страницы
-document.body.style.display = 'lightblue';
+document.body.style.background = 'lightblue';
 
-// Меняем текст на определенном элементе
-const header = document.querySelector('.vkitgetColorClass__colorTextPrimary--vmkYQ');
-if (header) {
-    header.textContent = 'miji fm!';
+// Находим оригинальную кнопку
+const originalButton = document.querySelector('[data-testid="audio-player-controls-state-button"]');
+
+if (originalButton) {
+    // Создаём кастомную кнопку
+    const customButton = document.createElement('button');
+    customButton.textContent = 'Custom Play Button';
+    customButton.style.padding = '10px 20px';
+    customButton.style.fontSize = '16px';
+    customButton.style.backgroundColor = 'orange';
+    customButton.style.color = 'white';
+    customButton.style.border = 'none';
+    customButton.style.borderRadius = '5px';
+    customButton.style.cursor = 'pointer';
+
+    // Добавляем обработчик клика
+    customButton.addEventListener('click', () => {
+        // Передаём событие оригинальной кнопке        originalButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+
+        console.log('Оригинальное событие выполнено');
+    });
+
+    // Удаляем оригинальную кнопку из DOM
+    originalButton.style.display = 'none';
+
+    // Добавляем кастомную кнопку в нужное место
+    const container = document.querySelector('.vkitAudioPlayerPlaybackControls__root--Zfn4x');
+    if (container) {
+        container.appendChild(customButton);
+    }
 }
-
-const element = document.querySelector('.vkitgetColorClass__colorTextPrimary--vmkYQ');
-
-console.log('some');
-element.style.color = 'red'
-console.log(element.style.display);
-
-
-// Скрываем элементы
-const ads = document.querySelectorAll('.ad-banner');
-ads.forEach(ad => ad.style.display = 'none');
